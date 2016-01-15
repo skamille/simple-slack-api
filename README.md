@@ -75,7 +75,7 @@ public class Example
   {
 
     final SlackSession session = SlackSessionFactory.
-      createWebSocketSlackSession("authenticationtoken", Proxy.Type.HTTP, "myproxy", 1234, true);
+      createWebSocketSlackSession("authenticationtoken", Proxy.Type.HTTP, "myproxy", 1234);
     session.addMessagePostedListener(new SlackMessagePostedListener()
     {
         @Override
@@ -103,7 +103,7 @@ public class Example
               e.printStackTrace();
           }
           //2 secs later, let's now delete the message (I can only delete my own messages)
-          session.deleteMessage(handle.getSlackReply().getTimestamp(),session.getChannel())
+          session.deleteMessage(handle.getReply().getTimestamp(),target)
         }
       });
     session.connect();
