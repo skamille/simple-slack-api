@@ -83,7 +83,7 @@ public class Example
         {
           SlackChannel target = event.getChannel();
           //let's send a message
-          SlackMessageHandle handle = session.sendMessage(target,
+          SlackMessageHandle<SlackMessageReply> handle = session.sendMessage(target,
                               event.getMessageContent(), null);
           try
           {
@@ -93,7 +93,7 @@ public class Example
               e.printStackTrace();
           }
           //2 secs later, let's update the message (I can only update my own messages)
-          session.updateMessage(handle.getSlackReply().getTimestamp(),session.getChannel(),
+          session.updateMessage(handle.getReply().getTimestamp(),target,
                                 event.getMessageContent()+" UPDATED");
           try
           {
