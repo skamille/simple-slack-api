@@ -81,8 +81,9 @@ public class Example
         @Override
         public void onEvent(SlackMessagePosted event, SlackSession session)
         {
+          SlackChannel target = event.getChannel();
           //let's send a message
-          SlackMessageHandle handle = session.sendMessage(session.getChannel(),
+          SlackMessageHandle handle = session.sendMessage(target,
                               event.getMessageContent(), null);
           try
           {
