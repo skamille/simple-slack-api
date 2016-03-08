@@ -1,54 +1,20 @@
+[![Build Status](https://travis-ci.org/Ullink/simple-slack-api.svg?branch=master)](https://travis-ci.org/Ullink/simple-slack-api)
+[![GitHub release](https://img.shields.io/github/release/Ullink/simple-slack-api.svg)](https://github.com/Ullink/simple-slack-api/releases)
+[![Join the chat at https://gitter.im/Ullink/simple-slack-api](https://badges.gitter.im/Ullink/simple-slack-api.svg)](https://gitter.im/Ullink/simple-slack-api?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 # Simple Slack API
 
-This library allows an aplication to connect to [Slack](http://www.slack.com/) to receive and send messages from any channel as if it were a slack client. 
+This library allows an application to connect to [Slack](http://www.slack.com/) to receive and send messages from any channel as if it were a slack client.
 
-The main purpose of this library is to build slack bots able to react to channel events without having to configure any web hook.
+The main purpose of this library is to build Slack bots able to react to channel events without having to configure any web hook.
 
+With this library you should be able to connect to Slack and to send some messages in less than 20 lines (no one-liners).
 
-## Short example
+## Maven/Gradle
 
-### Slack connection :
+You can add this library as a dependency to your Maven or Gradle project through [JitPack](https://jitpack.io/#Ullink/simple-slack-api).
 
-The connection is made through the SlackSessionFactory class :
-
-#### Direct connection :
-
-```java
-SlackSession session = SlackSessionFactory.
-  createWebSocketSlackSession("authenticationtoken");
-session.connect();
-```
-
-#### Through a proxy :
-
-```java
-SlackSession session = SlackSessionFactory.
-  createWebSocketSlackSession("authenticationtoken", Proxy.Type.HTTP, "myproxy", 1234);
-session.connect();
-```
-
-### Listening to messages :
-
-Slack messages can be retrieved by attaching a SlackMessageListener to the session provided by the factory :
-
-
-```java
-  session.addMessagePostedListener(new SlackMessagePostedListener()
-  {
-      @Override
-      public void onEvent(SlackMessagePosted event, SlackSession session)
-      {
-          session.sendMessageOverWebSocket(session.findChannelByName("general"), "Message sent : " + event.getMessageContent(), null);
-      }
-  });
-```
-
-(Since v0.4.0, lambda friendly version)
-```java
-session.addMessagePostedListener((e, s) 
-  -> s.sendMessageOverWebSocket(s.findChannelByName("general"), "Message sent : " + e.getMessageContent(), null));
-```
-### Message operation :
+## How to use it ?
 
 The SlackSession interface provides various methods to send/modify and delete messages on a given channel :
 ```java
@@ -174,6 +140,7 @@ Many thanks to everyone who has contributed to this library :
 * Georges Gomes
 * François Valdy
 * Harry Fox
+* Logan Clément
 
 (Let me know if I forgot someone, I'll fix that ASAP ;) )
 
